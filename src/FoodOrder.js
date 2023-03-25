@@ -34,7 +34,7 @@ const FoodOrder = (props) => {
     <Fragment>
       {!isErrorCatched && (
         <Fragment>
-          <h4 className="selFoodTitle">{selectedFood.name}</h4>
+          <h4 className="subTitle">{selectedFood.name}</h4>
           <img
             className="selFoodImg"
             src={require(`./images/${selectedFood.image}`)}
