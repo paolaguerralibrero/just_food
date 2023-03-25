@@ -1,3 +1,14 @@
+# JUST FOOD
+Learning objectives:
+- Multi-view SPA
+- React fragments
+- Conditional display
+- Props drilling problem
+- Code splitting using Lazy and Suspense
+- React Context (useContext)
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
