@@ -1,11 +1,17 @@
+import { useMediaQuery } from "react-responsive";
 import appStyles from "./App.module.css";
 import React, { Fragment, useState } from "react";
 import Foods from "./Foods";
 export const foodItemsContext = React.createContext();
 
 
+
 const App = () => {
   const [isChooseFoodPage, setIsChooseFoodPage] = useState(false);
+  const isLapOrDeskTop = useMediaQuery({
+    query: "(min-width: 1224px)",
+  });
+  const isMobile = useMediaQuery({ query: "(max-width: 480px)" });
   const [menuItems, setMenuItems] = useState([
     {
       id: 1,
@@ -63,6 +69,33 @@ const App = () => {
 
   return (
     <foodItemsContext.Provider value={menuItems}>
+      {isMobile && (
+            <div className={appStyles.App}>
+            <button
+              className={appStyles.togglebButton}
+              onClick={() => setIsChooseFoodPage(!isChooseFoodPage)}
+            >
+              {isChooseFoodPage ? "Availability Check" : "Order Food"}
+            </button>
+            <h3 className={appStyles.titleMobile}>Just Food Online Shop</h3>
+            {!isChooseFoodPage && (
+              <Fragment>
+                <h4 className={appStyles.subTitleMobile}>Menu Availability</h4>
+                <ul className={appStyles.ulAppMobile}>
+                  {menuItems.map((item) => {
+                    return (
+                      <li key={item.id} className={appStyles.liAppMobile}>
+                        {item.name} - {item.quantity}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </Fragment>
+            )}
+            {isChooseFoodPage && <Foods foodItems={menuItems}/>}
+          </div>
+      )}
+      {isLapOrDeskTop && (
     <div className={appStyles.App}>
       <button
         className={appStyles.togglebButton}
@@ -93,6 +126,7 @@ const App = () => {
       />}
 
     </div>
+    )}
     </foodItemsContext.Provider>
   );
 };
