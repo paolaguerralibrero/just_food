@@ -51,7 +51,7 @@ const App = () => {
       image: "ic.jpg",
     },
     {
-      id: 4,
+      id: 5,
       name: "Croquetas",
       quantity: 300,
       desc: "Croquetas - Little pieces of heaven",
@@ -59,6 +59,18 @@ const App = () => {
       image: "cro.jpg",
     },
   ]);
+
+  useEffect(() => {
+    if (user) {
+      const user = auth.currentUser;
+      setUserEmail(user.email);
+      if (user.email === "admin@justfood.com") {
+        setIsAdmin(true);
+      }
+    } else {
+      navigate("/");
+    }
+  },[user, loading]);
 
   const updateMenuItemQuantity = (id, orderQuantity) => {
     const updatedMenuItems = menuItems.map((item) => {
